@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.workshopspring.curso.entities.enums.OrderStatus;
 
 import jakarta.persistence.Entity;
@@ -32,7 +31,6 @@ public class Order implements Serializable {
 
     private Integer status;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_client")
     private User client;
