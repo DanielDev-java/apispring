@@ -13,6 +13,8 @@ import com.workshopspring.curso.repositories.UserRepository;
 import com.workshopspring.curso.services.exceptions.DatabaseException;
 import com.workshopspring.curso.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
     @Autowired
@@ -42,9 +44,14 @@ public class UserService {
     }
 
     public User update(Long id,User user){
-        User entity = repository.getReferenceById(id);
-        updateData(entity,user);
-        return repository.save(entity);
+        try {
+            User entity = repository.getReferenceById(id);
+            updateData(entity,user);
+            return repository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+
+        }
     }
 
     private void updateData(User entitiy, User user) {
