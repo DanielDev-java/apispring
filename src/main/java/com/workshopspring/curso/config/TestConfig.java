@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.workshopspring.curso.entities.User;
 import com.workshopspring.curso.entities.Order;
 import com.workshopspring.curso.entities.OrderItem;
+import com.workshopspring.curso.entities.Payment;
 import com.workshopspring.curso.entities.Product;
 import com.workshopspring.curso.entities.Category;
 import com.workshopspring.curso.entities.enums.OrderStatus;
@@ -71,6 +72,11 @@ public class TestConfig implements CommandLineRunner {
         p5.getCategory().add(cat2);
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
         orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+
+        Payment pay1 = new Payment(null,Instant.parse("2019-06-20T12:53:07Z"),o1);
+
+        o1.setPayment(pay1);
+        orderRepository.save(o1);
     }
 
 }
